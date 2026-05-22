@@ -9,14 +9,17 @@ import seaborn as sns
 from collections import Counter
 from scipy.sparse import hstack
 import numpy as np
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
 
 # ========================
 # CACHE: Load model
 # ========================
 @st.cache_resource
 def load_model():
-    model = pickle.load(open('model.pkl', 'rb'))
-    vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
+    model = pickle.load(open(BASE_DIR / 'model.pkl', 'rb'))
+    vectorizer = pickle.load(open(BASE_DIR / 'vectorizer.pkl', 'rb'))
     return model, vectorizer
 
 # ========================
@@ -25,7 +28,7 @@ def load_model():
 @st.cache_data
 def load_dataset():
     try:
-        df_raw = pd.read_csv('dataset_hc3.csv', engine='python', on_bad_lines='skip')
+        df_raw = pd.read_csv(BASE_DIR / 'dataset_hc3.csv', engine='python', on_bad_lines='skip')
 
         def clean_list_string(text):
             try:
@@ -89,13 +92,13 @@ menu = st.sidebar.selectbox("Menu", ["Home (Detection)", "EDA", "Model Info"])
 # ========================
 if menu == "Home (Detection)":
     st.title("🤖 AI vs Human Text Detection")
-    st.write("Enter text to detect whether it was created by AI or humans.")
+    st.write("Masukkan teks untuk mendeteksi apakah dibuat oleh AI atau manusia.")
 
     text = st.text_area("Input Teks:", height=200)
 
-    if st.button("Detect"):
+    if st.button("Deteksi"):
         if text.strip() == "":
-            st.warning("Enter the text first.")
+            st.warning("Masukkan teks terlebih dahulu.")
         else:
             prediction, prob = predict_text(text)
             if prediction == 1:
