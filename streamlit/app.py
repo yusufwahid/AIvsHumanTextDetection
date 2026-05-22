@@ -92,13 +92,13 @@ menu = st.sidebar.selectbox("Menu", ["Home (Detection)", "EDA", "Model Info"])
 # ========================
 if menu == "Home (Detection)":
     st.title("🤖 AI vs Human Text Detection")
-    st.write("Masukkan teks untuk mendeteksi apakah dibuat oleh AI atau manusia.")
+    st.write("Enter text to detect whether it was created by AI or humans.")
 
-    text = st.text_area("Input Teks:", height=200)
+    text = st.text_area("Text Input:", height=200)
 
     if st.button("Deteksi"):
         if text.strip() == "":
-            st.warning("Masukkan teks terlebih dahulu.")
+            st.warning("Enter the text first.")
         else:
             prediction, prob = predict_text(text)
             if prediction == 1:
