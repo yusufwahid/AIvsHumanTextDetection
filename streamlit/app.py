@@ -92,7 +92,7 @@ menu = st.sidebar.selectbox("Menu", ["Home (Detection)", "EDA", "Model Info"])
 # ========================
 if menu == "Home (Detection)":
     st.title("🤖 AI vs Human Text Detection")
-    st.write("Enter text to detect whether it was created by AI or humans.")
+    st.write("Enter text [English] to detect whether it was created by AI or humans.")
 
     text = st.text_area("Text Input:", height=200)
 
